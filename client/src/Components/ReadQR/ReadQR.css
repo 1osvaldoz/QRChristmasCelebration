@@ -1,0 +1,26 @@
+.ReadQr__container {
+  text-align: -webkit-center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Qr__container {
+  max-width: 500px;
+}
+.imgSanta {
+  max-height: 300px;
+  border-radius: 50%;
+}
+.confirmVisitModal__BodyContainer>h3,.confirmVisitModal__BodyContainer>h2{
+  margin-bottom: 0px;
+}
+.confirmVisitModal__BodyContainer > h2 {
+  color: #90191b;
+  font-weight: bold;
+}
+.ModalRegisterVisit {
+  padding-bottom: 30px;
+  min-height: 700px;
+
+}
+.ModalFooterRegisterVisit{
+  text-align: center !important;
+}

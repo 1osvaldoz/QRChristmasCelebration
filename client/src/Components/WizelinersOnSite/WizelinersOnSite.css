@@ -1,0 +1,15 @@
+.searchCityDrop > ul > li > span {
+  color: rgb(144, 25, 27);
+}
+.searchCityDrop {
+  width: 30vw;
+}
+.selectCity__container {
+  display: flex;
+  flex-flow: column;
+}
+.selectContainer{
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
