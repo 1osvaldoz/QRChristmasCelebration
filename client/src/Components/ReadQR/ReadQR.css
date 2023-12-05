@@ -9,12 +9,18 @@
   max-height: 300px;
   border-radius: 50%;
 }
+.confirmVisitModal__BodyContainer{
+  text-align: -webkit-center;
+}
 .confirmVisitModal__BodyContainer>h3,.confirmVisitModal__BodyContainer>h2{
   margin-bottom: 0px;
 }
 .confirmVisitModal__BodyContainer > h2 {
   color: #90191b;
   font-weight: bold;
+}
+.modalBodyVisit{
+  text-align: center;
 }
 .ModalRegisterVisit {
   padding-bottom: 30px;
@@ -23,4 +29,7 @@
 }
 .ModalFooterRegisterVisit{
   text-align: center !important;
+}
+.confirmVisitModal__dialog{
+  min-width: 50%;
 }

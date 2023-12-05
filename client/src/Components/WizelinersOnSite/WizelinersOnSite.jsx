@@ -3,22 +3,11 @@ import { useState } from "react";
 import Header from "../Common/Header/Header";
 import "./WizelinersOnSite.css";
 import requestAxios from "../../util/requestAxios";
-import {
-  TextInput,
-  Button,
-  Icon,
-  Row,
-  Col,
-  Card,
-  CardTitle,
-  Collection,
-  CollectionItem,
-  Select,
-} from "react-materialize";
+import { Button, Row, Col, Dropdown, Form, Table } from "react-bootstrap";
 export default () => {
   const [emailText, setEmailText] = useState("monzon.manuel@wizeline.com");
-  const [selectedCityValue, setSelectedCityValue] = useState("");
-  const [selectedCityText, setSelectedCityText] = useState("");
+  const [selectedCityValue, setSelectedCityValue] = useState("GDL");
+  const [selectedCityText, setSelectedCityText] = useState("GUADALAJARA");
   const [wizelinersList, setWizelinersList] = useState([]);
   const searchWizeliner = async (city) => {
     setWizelinersList([]);
@@ -26,6 +15,7 @@ export default () => {
       url: `getWizelinerOnSite/${city}`,
       method: "get",
     });
+    debugger;
     setWizelinersList(data);
   };
 
@@ -37,32 +27,13 @@ export default () => {
           <div className="selectCity__container">
             <h3>City</h3>
             <div className="selectContainer">
-              <Select
-                id="select123"
-                multiple={false}
+              <Form.Control
+                as="select"
                 onChange={(x, z) => {
                   setSelectedCityValue(x.target.selectedOptions[0].value);
                   setSelectedCityText(x.target.selectedOptions[0].innerText);
                   searchWizeliner(x.target.selectedOptions[0].value);
                 }}
-                options={{
-                  classes: "searchCityDrop",
-                  dropdownOptions: {
-                    alignment: "left",
-                    autoTrigger: true,
-                    closeOnClick: true,
-                    constrainWidth: true,
-                    coverTrigger: true,
-                    hover: false,
-                    inDuration: 150,
-                    onCloseEnd: null,
-                    onCloseStart: null,
-                    onOpenEnd: null,
-                    onOpenStart: null,
-                    outDuration: 250,
-                  },
-                }}
-                value=""
               >
                 <option disabled value="">
                   Choose your option
@@ -73,17 +44,18 @@ export default () => {
                 <option value="CDMX" className="searchCityItem">
                   Mexico
                 </option>
-              </Select>
+              </Form.Control>
+
               <Button
                 className="red"
                 node="button"
                 style={{
                   maxWidth: "50px",
                 }}
-                waves="red"
-                onClick={()=>searchWizeliner(selectedCityValue)}
+                variant="danger"
+                onClick={() => searchWizeliner(selectedCityValue)}
               >
-                <Icon left>search</Icon>
+                <i className="fa fa-search" aria-hidden="true"></i>
               </Button>
             </div>
           </div>
@@ -91,17 +63,23 @@ export default () => {
       </Row>
       <Row>
         <Col m={12} s={12}>
-          <h1>{selectedCityText}</h1>
-          <Collection>
-            {wizelinersList.map((item, i) => (
-              <CollectionItem
-                style={{ textTransform: "capitalize" }}
-                key={`wizelinerItem${item.guid}`}
-              >
-                {i + 1} - {item.name}
-              </CollectionItem>
-            ))}
-          </Collection>
+          {/* <h1>{selectedCityText}</h1> */}
+          <Table striped bordered hover className="tblWizeliners">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Wizeliner</td>
+              </tr>
+            </thead>
+            <tbody>
+              {wizelinersList.map((item, i) => (
+                <tr key={`wizelinerItem${item.guid}`}>
+                  <th>{i + 1}</th>
+                  <th className="capitalize">{item.name}</th>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </Col>
       </Row>
     </div>

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import CModal from "../Common/CModal/CModal";
-import { Button, Icon, Modal, TextInput } from "react-materialize";
+import { Button, Form, Modal } from "react-bootstrap";
 import { QrReader } from "react-qr-reader";
 import Header from "../Common/Header/Header";
 import requestAxios from "../../util/requestAxios";
@@ -51,26 +50,23 @@ export default () => {
   };
   return (
     <div className="ReadQr__container">
-      <CModal
-        className="ModalRegisterVisit"
-        classNameFooter="ModalFooterRegisterVisit"
-        ref={childRef}
-        header={
-          <>
-            <img className="imgSanta" src={imgSanta} />
-            <h2>
-              <b>
-                Hi
-                <span className="capitalize" style={{ color: "#90191B" }}>
-                  {" "}
-                  {wizeLinerData?.name}
-                </span>
-                !
-              </b>
-            </h2>
-          </>
-        }
-        body={
+      <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName='confirmVisitModal__dialog'>
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body className="modalBodyVisit">
+          <h2>
+            <b>Welcome to Wizeline Posada 2023!</b>
+          </h2>
+          <img className="imgSanta" src={imgSanta} />
+          <h2>
+            <b>
+              Hi
+              <span className="capitalize" style={{ color: "#90191B" }}>
+                {" "}
+                {wizeLinerData?.name}
+              </span>
+              !
+            </b>
+          </h2>
           <div className="confirmVisitModal__BodyContainer">
             <h3>Welcome to posada 2023</h3>
             {wizeLinerData?.arrived && (
@@ -78,25 +74,21 @@ export default () => {
             )}
             <h5> Enjoy the party.</h5>
           </div>
-        }
-        footer={
-          <div className="confirmVisitModal__FooterContainer">
-            {!wizeLinerData?.arrived && (
-              <Button className="green" onClick={() => confirmVisit()}>
-                Add visit
-              </Button>
-            )}{" "}
-            <Button className="red" onClick={() => closeModal()}>
-              Close
+        </Modal.Body>
+        <Modal.Footer>
+          {!wizeLinerData?.arrived && (
+            <Button variant="success" onClick={() => confirmVisit()}>
+              Add visit
             </Button>
-          </div>
-        }
-        onCloseEnd={() => {}}
-      />
+          )}{" "}
+          <Button variant="danger" onClick={() => closeModal()}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Header />
-      <h2>
-        <b>Welcome to Wizeline Posada 2023!</b>
-      </h2>
+
       <h5>Please show me your QR Code to register your visit</h5>
       <div className="Qr__container">
         <QrReader
@@ -105,17 +97,18 @@ export default () => {
           style={{ width: "100%" }}
         />
         <div className="inputSearch">
-          <TextInput
-            email
+          <Form.Control
             label="Email"
-            validate
             value={emailText}
             onChange={(input) => setEmailText(input.target.value)}
           />
         </div>
-        <Button className="red" waves="light" onClick={() => searchWizeliner()}>
+        <Button
+          variant="danger"
+          waves="light"
+          onClick={() => searchWizeliner()}
+        >
           Search
-          <Icon left>search</Icon>
         </Button>
       </div>
     </div>

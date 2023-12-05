@@ -3,15 +3,7 @@ import { useState } from "react";
 import Header from "../Common/Header/Header";
 import "./FindWizeliner.css";
 import requestAxios from "../../util/requestAxios";
-import {
-  TextInput,
-  Button,
-  Icon,
-  Row,
-  Col,
-  Card,
-  CardTitle,
-} from "react-materialize";
+import { Button, Form, Row, Col, Card, CardTitle } from "react-bootstrap";
 import { useEffect } from "react";
 export default () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -19,15 +11,17 @@ export default () => {
   const [qrValue, setQrValue] = useState();
 
   const searchWizeliner = async () => {
-    const { error, data } = await requestAxios({
-      url: `getWizelinerByEmail/${emailText}`,
-      method: "get",
-    });
-    setQrValue(data);
+    if (emailText) {
+      const { error, data } = await requestAxios({
+        url: `getWizelinerByEmail/${emailText}`,
+        method: "get",
+      });
+      setQrValue(data);
+    }
   };
-  useEffect(()=>{
+  useEffect(() => {
     searchWizeliner();
-  },[])
+  }, []);
   return (
     <div className="FindWizeliner__container">
       <Header />
@@ -37,46 +31,42 @@ export default () => {
       <h5>Add your email to generate your QR Code</h5>
       <br />
       <div className="inputSearch">
-        <TextInput
-          email
+        <Form.Control
           label="Email"
-          validate
-          value={emailText}
+          value={emailText ? emailText : ""}
           onChange={(input) => setEmailText(input.target.value)}
-        />
+        />{" "}
+        <Button variant="danger" onClick={() => searchWizeliner()}>
+          <i className="fa fa-search" aria-hidden="true"></i>
+        </Button>
       </div>
-      <Button className="red" waves="light" onClick={() => searchWizeliner()}>
-        Search
-        <Icon left>search</Icon>
-      </Button>
+
       <div className="FindWizelinerQR__container">
         {qrValue ? (
-          <Row>
-            <Col m={12} s={12}>
-              <Card
-                className="QRCard__container"
-                header={
+          <>
+            <Card className="QRResult__container">
+              <QRCode
+                className="QRCodeImage"
+                size={256}
+                value={`${qrValue.guid}|${qrValue.email}|${qrValue.city}`}
+                viewBox={`0 0 256 256`}
+              />
+              <Card.Body>
+                <Card.Title>
+                  {" "}
                   <h2 className="QRCard__containerHeader">
                     Hi <span className="capitalize">{qrValue.name}</span>!
                   </h2>
-                }
-                revealIcon={<Icon>more_vert</Icon>}
-                title={
-                  <QRCode
-                    className="QRCodeImage"
-                    size={256}
-                    value={`${qrValue.guid}|${qrValue.email}|${qrValue.city}`}
-                    viewBox={`0 0 256 256`}
-                  />
-                }
-              >
-                <p>
-                  With this code you will register your visit on the posada on{" "}
-                  {qrValue.city}
-                </p>
-              </Card>
-            </Col>
-          </Row>
+                </Card.Title>
+                <Card.Text>
+                  <p>
+                    With this code you will register your visit on the posada on{" "}
+                    {qrValue.city}
+                  </p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </>
         ) : (
           <Row>
             <Col m={12} s={12}>
@@ -90,7 +80,6 @@ export default () => {
                       waves="light"
                     />
                   }
-                  revealIcon={<Icon>more_vert</Icon>}
                   title="Oops!"
                 >
                   <p>We can't find you</p>

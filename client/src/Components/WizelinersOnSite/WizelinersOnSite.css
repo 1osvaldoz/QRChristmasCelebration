@@ -8,8 +8,12 @@
   display: flex;
   flex-flow: column;
 }
-.selectContainer{
+.selectContainer {
   align-self: center;
   display: flex;
   align-items: center;
+}
+.tblWizeliners {
+  margin-top: 50px;
+  max-width: 500px;
 }
