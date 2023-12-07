@@ -1,7 +1,14 @@
  import FindWizeliner from "../Components/FindWizeliner/FindWizeliner";
+import Home from "../Components/Home";
 import ReadQR from "../Components/ReadQR/ReadQR";
 import WizelinersOnSite from "../Components/WizelinersOnSite/WizelinersOnSite"
 const routes = [
+  {
+    path: "/",
+    component: Home,
+    isPrivate: false,
+    isExact: true,
+  },
   {
     path: "/FindWizeliner",
     component: FindWizeliner,
