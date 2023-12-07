@@ -62,7 +62,7 @@ export default () => {
                 </Card.Title>
                 <Card.Text>
                   <p>
-                    Show this code to have access to the Posada in {" "}
+                    Show this code to access to the Posada in {" "}
                     {qrValue.city}
                   </p>
                 </Card.Text>
