@@ -71,18 +71,19 @@ export default () => {
           <Row>
             <Col m={12} s={12}>
               {qrValue == "" && (
-                <Card
-                  className="QRCard__container"
-                  header={
-                    <CardTitle
-                      image="https://i5.walmartimages.com.mx/mg/gm/3pp/asr/aa3dce21-2c61-4131-b796-77b1c8075736.0421e3fcf37d2faf90d3a39ff48ff8d8.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
-                      reveal
-                      waves="light"
-                    />
-                  }
-                  title="Oops!"
-                >
-                  <p>We can't find you</p>
+                <Card className="QRResult__container">
+                  <Card.Body>
+                    <Card.Title>
+                      {" "}
+                      <h2 className="QRCard__containerHeader">Oops!</h2>
+                    </Card.Title>
+                    <Card.Text>
+                      <p>
+                        We can't find you{" "}
+                        <img width="450px" src="https://i5.walmartimages.com.mx/mg/gm/3pp/asr/aa3dce21-2c61-4131-b796-77b1c8075736.0421e3fcf37d2faf90d3a39ff48ff8d8.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" />
+                      </p>
+                    </Card.Text>
+                  </Card.Body>
                 </Card>
               )}
             </Col>
