@@ -26,7 +26,7 @@ export default () => {
     <div className="FindWizeliner__container">
       <Header />
       <h2>
-        <b>Welcome to Wizeline Posada 2023!</b>
+        <b>Welcome to the Wizeline Posada 2023!</b>
       </h2>
       <h5>
         Add your email to generate your QR code and show it to access the party.
