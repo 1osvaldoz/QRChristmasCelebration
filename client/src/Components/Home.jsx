@@ -1,5 +1,5 @@
 import Header from "./Common/Header/Header";
-import bannerHome from "../assets/img/bannerhome.jpeg";
+import bannerHome from "../assets/img/newbannerhome.jpeg";
 export default () => {
   const today = new Date();
   return (
