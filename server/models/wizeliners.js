@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const wizelinerSchema = new Schema(
   {
-    _id:{type: String, required: true,unique:true},
     name: { type: String, required: true },
     city: { type: String, required: true },
     email: { type: String, required: true, unique: true  },
