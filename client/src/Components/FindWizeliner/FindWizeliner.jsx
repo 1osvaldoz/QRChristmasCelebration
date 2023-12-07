@@ -13,7 +13,7 @@ export default () => {
   const searchWizeliner = async () => {
     if (emailText) {
       const { error, data } = await requestAxios({
-        url: `getWizelinerByEmail/${emailText}`,
+        url: `getWizelinerByEmail/${emailText.toLowerCase()}`,
         method: "get",
       });
       setQrValue(data);
