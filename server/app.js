@@ -23,7 +23,7 @@ mongoose
     console.log(err);
   });
 
-app.listen(5000, "192.168.50.75");
+app.listen(5000);
 const routes = ["index", "add-item"];
 app.get("/", (req, res) => {
   res.sendFile(`./views/index.html`, { root: __dirname });
