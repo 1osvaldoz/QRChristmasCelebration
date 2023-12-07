@@ -28,7 +28,9 @@ export default () => {
       <h2>
         <b>Welcome to Wizeline Posada 2023!</b>
       </h2>
-      <h5>Add your email to generate your QR code and show it to register your visit at the party</h5>
+      <h5>
+        Add your email to generate your QR code and show it to access the party.
+      </h5>
       <br />
       <div className="inputSearch">
         <Form.Control
@@ -60,7 +62,7 @@ export default () => {
                 </Card.Title>
                 <Card.Text>
                   <p>
-                    With this code you will register your visit on the posada on{" "}
+                    Show this code to have access to the Posada in {" "}
                     {qrValue.city}
                   </p>
                 </Card.Text>
