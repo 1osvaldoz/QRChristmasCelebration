@@ -3,6 +3,7 @@ import { Route, Routes, BrowserRouter, Link } from "react-router-dom";
 import AppContext from "./Context/AppContext";
 import useGlobalState from "./hooks/useGlobalState";
 import routes from "./Routes/routes";
+import "./App.css"
 const App = () => {
   const globalState = useGlobalState();
 

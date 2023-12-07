@@ -1,13 +1,11 @@
 import Header from "./Common/Header/Header";
-
+import bannerHome from "../assets/img/bannerhome.jpeg";
 export default () => {
   const today = new Date();
   return (
     <div className="Home__container">
       <Header />
-      <center>
-        <h1>Welcome to End Year Celebration {today.getFullYear()}</h1>
-      </center>
+      <img src={bannerHome} />
     </div>
   );
 };
