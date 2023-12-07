@@ -13,7 +13,7 @@ export default () => {
   const searchWizeliner = async () => {
     if (emailText) {
       const { error, data } = await requestAxios({
-        url: `getWizelinerByEmail/${emailText.toLowerCase()}`,
+        url: `getWizelinerByEmail/${emailText.toLowerCase().trim()}`,
         method: "get",
       });
       setQrValue(data);
@@ -36,7 +36,7 @@ export default () => {
         <Form.Control
           label="Email"
           value={emailText ? emailText : ""}
-          onChange={(input) => setEmailText(input.target.value)}
+          onChange={(input) => setEmailText(input.target.value.trim())}
         />{" "}
         <Button variant="danger" onClick={() => searchWizeliner()}>
           <i className="fa fa-search" aria-hidden="true"></i>
