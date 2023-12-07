@@ -28,7 +28,7 @@ export default () => {
       <h2>
         <b>Welcome to Wizeline Posada 2023!</b>
       </h2>
-      <h5>Add your email to generate your QR Code</h5>
+      <h5>Add your email to generate your QR code and show it to register your visit at the party</h5>
       <br />
       <div className="inputSearch">
         <Form.Control
@@ -72,16 +72,17 @@ export default () => {
             <Col m={12} s={12}>
               {qrValue == "" && (
                 <Card className="QRResult__container">
+                  <Card.Title>
+                    {" "}
+                    <h2 className="QRCard__containerHeader">Oops!</h2>
+                  </Card.Title>
                   <Card.Body>
-                    <Card.Title>
-                      {" "}
-                      <h2 className="QRCard__containerHeader">Oops!</h2>
-                    </Card.Title>
                     <Card.Text>
-                      <p>
-                        We can't find you{" "}
-                        <img width="450px" src="https://i5.walmartimages.com.mx/mg/gm/3pp/asr/aa3dce21-2c61-4131-b796-77b1c8075736.0421e3fcf37d2faf90d3a39ff48ff8d8.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" />
-                      </p>
+                      <p>We can't find you </p>
+                      <img
+                        width="450px"
+                        src="https://i5.walmartimages.com.mx/mg/gm/3pp/asr/aa3dce21-2c61-4131-b796-77b1c8075736.0421e3fcf37d2faf90d3a39ff48ff8d8.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
+                      />
                     </Card.Text>
                   </Card.Body>
                 </Card>

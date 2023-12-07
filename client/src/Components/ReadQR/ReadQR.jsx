@@ -25,11 +25,13 @@ export default () => {
     }
   };
   const searchWizeliner = async () => {
-    const { error, data } = await requestAxios({
-      url: `getWizelinerByEmail/${emailText}`,
-      method: "get",
-    });
-    setWizeLinerData(data);
+    if (emailText) {
+      const { error, data } = await requestAxios({
+        url: `getWizelinerByEmail/${emailText.toLocaleLowerCase()}`,
+        method: "get",
+      });
+      setWizeLinerData(data);
+    }
     openModal();
   };
   const confirmVisit = async () => {
@@ -42,51 +44,78 @@ export default () => {
   };
   const openModal = () => {
     setShowModal(true);
-    childRef.current.openModal();
   };
   const closeModal = () => {
     setShowModal(false);
-    childRef.current.closeModal();
   };
+  const x=wizeLinerData
   return (
     <div className="ReadQr__container">
-      <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName='confirmVisitModal__dialog'>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body className="modalBodyVisit">
-          <h2>
-            <b>Welcome to Wizeline Posada 2023!</b>
-          </h2>
-          <img className="imgSanta" src={imgSanta} />
-          <h2>
-            <b>
-              Hi
-              <span className="capitalize" style={{ color: "#90191B" }}>
-                {" "}
-                {wizeLinerData?.name}
-              </span>
-              !
-            </b>
-          </h2>
-          <div className="confirmVisitModal__BodyContainer">
-            <h3>Welcome to posada 2023</h3>
-            {wizeLinerData?.arrived && (
-              <h2>You already registered your visit</h2>
-            )}
-            <h5> Enjoy the party.</h5>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          {!wizeLinerData?.arrived && (
-            <Button variant="success" onClick={() => confirmVisit()}>
-              Add visit
+      {wizeLinerData?.email  ? (
+        <Modal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          dialogClassName="confirmVisitModal__dialog"
+        >
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body className="modalBodyVisit">
+            <h2>
+              <b>Welcome to Wizeline Posada 2023!</b>
+            </h2>
+            <img className="imgSanta" src={imgSanta} />
+            <h2>
+              <b>
+                Hi
+                <span className="capitalize" style={{ color: "#90191B" }}>
+                  {" "}
+                  {wizeLinerData?.name}
+                </span>
+                !
+              </b>
+            </h2>
+            <div className="confirmVisitModal__BodyContainer">
+              <h3>Welcome to posada 2023</h3>
+              {wizeLinerData?.arrived && (
+                <h2>You already registered your visit</h2>
+              )}
+              <h5> Enjoy the party.</h5>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            {!wizeLinerData?.arrived && (
+              <Button variant="success" onClick={() => confirmVisit()}>
+                Add visit
+              </Button>
+            )}{" "}
+            <Button variant="danger" onClick={() => closeModal()}>
+              Close
             </Button>
-          )}{" "}
-          <Button variant="danger" onClick={() => closeModal()}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
+          </Modal.Footer>
+        </Modal>
+      ) : (
+        <Modal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          dialogClassName="confirmVisitModal__dialog"
+        >
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body className="modalBodyVisit">
+            <h1>Oops!</h1>
+            <h2>
+              <b> we cant find you!</b>
+            </h2>
+            <img
+              className="imgSanta"
+              src="https://i5.walmartimages.com.mx/mg/gm/3pp/asr/aa3dce21-2c61-4131-b796-77b1c8075736.0421e3fcf37d2faf90d3a39ff48ff8d8.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={() => closeModal()}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
       <Header />
 
       <h5>Please show me your QR Code to register your visit</h5>
