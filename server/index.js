@@ -12,8 +12,7 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-const uri ="mongodb+srv://1osvaldoz:Papalote123$@cluster0.7ubkkog.mongodb.net/Posada?retryWrites=true&w=majority"
-//"mongodb+srv://1osvaldoz:Papalote123$@cluster0.7ubkkog.mongodb.net/PosadaWizeliners2023?retryWrites=true&w=majority
+const uri ="mongodb+srv://1osvaldoz:<Password>@cluster0.7ubkkog.mongodb.net/Posada?retryWrites=true&w=majority"
 mongoose
   .connect(uri)
   .then(() => {
