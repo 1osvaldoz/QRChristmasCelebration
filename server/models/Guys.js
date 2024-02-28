@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const wizelinerSchema = new Schema(
+const GuySchema = new Schema(
   {
+    _id:{type: String, required: true,unique:true},
     name: { type: String, required: true },
     city: { type: String, required: true },
     email: { type: String, required: true, unique: true  },
@@ -14,5 +15,5 @@ const wizelinerSchema = new Schema(
   { timestamps: true }
 );
 
-const Wizeliner = mongoose.model("Wizeliners", wizelinerSchema);
-module.exports = Wizeliner;
+const Guy = mongoose.model("Guys", GuySchema);
+module.exports = Guy;

@@ -1,7 +1,7 @@
- import FindWizeliner from "../Components/FindWizeliner/FindWizeliner";
+ import FindGuy from "../Components/FindGuy/FindGuy";
 import Home from "../Components/Home";
 import ReadQR from "../Components/ReadQR/ReadQR";
-import WizelinersOnSite from "../Components/WizelinersOnSite/WizelinersOnSite"
+import PeopleOnSite from "../Components/PeopleOnSite/PeopleOnSite"
 const routes = [
   {
     path: "/",
@@ -10,8 +10,8 @@ const routes = [
     isExact: true,
   },
   {
-    path: "/FindWizeliner",
-    component: FindWizeliner,
+    path: "/FindGuy",
+    component: FindGuy,
     isPrivate: false,
     isExact: true,
   },
@@ -22,8 +22,8 @@ const routes = [
     isExact: true,
   } 
   , {
-    path: "/WizelinersOnSite",
-    component: WizelinersOnSite,
+    path: "/PeopleOnSite",
+    component: PeopleOnSite,
     isPrivate: false,
     isExact: true,
   } 

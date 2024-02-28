@@ -8,15 +8,15 @@ import "./ReadQR.css";
 export default () => {
   const [emailText, setEmailText] = useState("");
   const childRef = useRef(null);
-  const [wizeLinerData, setWizeLinerData] = useState();
+  const [GuyData, setGuyData] = useState();
   const [showModal, setShowModal] = useState(false);
   const readQR = async (result, error) => {
     if (!!result && !showModal) {
       const { error, data } = await requestAxios({
-        url: `getWizelinerByGUID/${result?.text.split("|")[0]}`,
+        url: `getGuyByGUID/${result?.text.split("|")[0]}`,
         method: "get",
       });
-      setWizeLinerData(data);
+      setGuyData(data);
       openModal();
     }
 
@@ -24,22 +24,22 @@ export default () => {
       console.info(error);
     }
   };
-  const searchWizeliner = async () => {
+  const searchGuy = async () => {
     if (emailText) {
       const { error, data } = await requestAxios({
-        url: `getWizelinerByEmail/${emailText.toLowerCase().trim()}`,
+        url: `getGuyByEmail/${emailText.toLowerCase().trim()}`,
         method: "get",
       });
-      setWizeLinerData(data);
+      setGuyData(data);
     }
     openModal();
   };
   const confirmVisit = async () => {
     const { error, data } = await requestAxios({
-      url: `registerAttendance/${wizeLinerData.guid}`,
+      url: `registerAttendance/${GuyData.guid}`,
       method: "get",
     });
-    setWizeLinerData(null);
+    setGuyData(null);
     closeModal();
   };
   const openModal = () => {
@@ -48,10 +48,10 @@ export default () => {
   const closeModal = () => {
     setShowModal(false);
   };
-  const x=wizeLinerData
+  const x=GuyData
   return (
     <div className="ReadQr__container">
-      {wizeLinerData?.email  ? (
+      {GuyData?.email  ? (
         <Modal
           show={showModal}
           onHide={() => setShowModal(false)}
@@ -60,7 +60,7 @@ export default () => {
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body className="modalBodyVisit">
             <h2>
-              <b>Welcome to Wizeline Posada 2023!</b>
+              <b>Welcome to Guy Posada 2023!</b>
             </h2>
             <img className="imgSanta" src={imgSanta} />
             <h2>
@@ -68,21 +68,21 @@ export default () => {
                 Hi
                 <span className="capitalize" style={{ color: "#90191B" }}>
                   {" "}
-                  {wizeLinerData?.name}
+                  {GuyData?.name}
                 </span>
                 !
               </b>
             </h2>
             <div className="confirmVisitModal__BodyContainer">
               <h3>Welcome to posada 2023</h3>
-              {wizeLinerData?.arrived && (
+              {GuyData?.arrived && (
                 <h2>You already registered your visit</h2>
               )}
               <h5> Enjoy the party.</h5>
             </div>
           </Modal.Body>
           <Modal.Footer>
-            {!wizeLinerData?.arrived && (
+            {!GuyData?.arrived && (
               <Button variant="success" onClick={() => confirmVisit()}>
                 Add visit
               </Button>
@@ -135,7 +135,7 @@ export default () => {
         <Button
           variant="danger"
           waves="light"
-          onClick={() => searchWizeliner()}
+          onClick={() => searchGuy()}
         >
           Search
         </Button>

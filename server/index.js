@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const WizeLiner = require("./models/wizeliners");
+const Guy = require("./models/Guys");
 const crypto = require("crypto");
 
 const app = express();
@@ -12,8 +12,8 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-const uri =
-  "mongodb+srv://1osvaldoz:Papalote123$@cluster0.7ubkkog.mongodb.net/PosadaWizeliners2023?retryWrites=true&w=majority";
+const uri ="mongodb+srv://1osvaldoz:Papalote123$@cluster0.7ubkkog.mongodb.net/Posada?retryWrites=true&w=majority"
+//"mongodb+srv://1osvaldoz:Papalote123$@cluster0.7ubkkog.mongodb.net/PosadaWizeliners2023?retryWrites=true&w=majority
 mongoose
   .connect(uri)
   .then(() => {
@@ -34,15 +34,15 @@ routes.map((item) => {
   });
 });
 
-app.get("/createWizeliners", (req, res) => {
+app.get("/createGuys", (req, res) => {
   const today = new Date();
   const todayUTC = new Date(today.toUTCString());
 
-  var wizelinersList = require("./data/wizelinerData.json");
+  var GuysList = require("./data/GuyData.json");
 
-  const newItems = wizelinersList.map((item) => {
+  const newItems = GuysList.map((item) => {
     const name = item.email.split("@")[0].replace(".", " ");
-    const email = item.email;
+    const email = String(item.email).toLocaleLowerCase();
     const city = item.data.split(" ")[0];
     const newItem = {
       _id:email,
@@ -56,7 +56,7 @@ app.get("/createWizeliners", (req, res) => {
     
     return newItem;
   });
-  WizeLiner.insertMany(newItems)
+  Guy.insertMany(newItems)
     .then(function () {
       res.send("<h1>Data inserted</h1>"); // Success
     })
@@ -66,18 +66,18 @@ app.get("/createWizeliners", (req, res) => {
     });
 });
 
-app.get("/getWizelinerByEmail/:email", (req, res) => {
-  WizeLiner.findOne({ email: req.params.email }).then((result) =>
+app.get("/getGuyByEmail/:email", (req, res) => {
+  Guy.findOne({ email: req.params.email }).then((result) =>
     res.send(result)
   );
 });
-app.get("/getWizelinerByGUID/:GUID", (req, res) => {
-  WizeLiner.findOne({ guid: req.params.GUID }).then((result) =>
+app.get("/getGuyByGUID/:GUID", (req, res) => {
+  Guy.findOne({ guid: req.params.GUID }).then((result) =>
     res.send(result)
   );
 });
-app.get("/getWizelinerOnSite/:city", (req, res) => {
-  WizeLiner.find({ arrived: true, city: req.params.city }).then((result) =>
+app.get("/getGuyOnSite/:city", (req, res) => {
+  Guy.find({ arrived: true, city: req.params.city }).then((result) =>
     res.send(result)
   );
 });
@@ -85,7 +85,7 @@ app.get("/registerAttendance/:GUID", (req, res) => {
   const today = new Date();
   const todayUTC = new Date(today.toUTCString());
   const update = { arrived: true, arrivedDateTimeUTC: todayUTC };
-  WizeLiner.findOneAndUpdate({ guid: req.params.GUID }, update).then((result) =>
+  Guy.findOneAndUpdate({ guid: req.params.GUID }, update).then((result) =>
     res.send(result)
   );
 });

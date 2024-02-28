@@ -1,7 +1,7 @@
 import QRCode from "react-qr-code";
 import { useState } from "react";
 import Header from "../Common/Header/Header";
-import "./FindWizeliner.css";
+import "./FindGuy.css";
 import requestAxios from "../../util/requestAxios";
 import { Button, Form, Row, Col, Card, CardTitle } from "react-bootstrap";
 import { useEffect } from "react";
@@ -10,23 +10,23 @@ export default () => {
   const [emailText, setEmailText] = useState(urlParams.get("email"));
   const [qrValue, setQrValue] = useState();
 
-  const searchWizeliner = async () => {
+  const searchGuy = async () => {
     if (emailText) {
       const { error, data } = await requestAxios({
-        url: `getWizelinerByEmail/${emailText.toLowerCase().trim()}`,
+        url: `getGuyByEmail/${emailText.toLowerCase().trim()}`,
         method: "get",
       });
       setQrValue(data);
     }
   };
   useEffect(() => {
-    searchWizeliner();
+    searchGuy();
   }, []);
   return (
-    <div className="FindWizeliner__container">
+    <div className="FindGuy__container">
       <Header />
       <h2>
-        <b>Welcome to the Wizeline Posada 2023!</b>
+        <b>Welcome to the Posada 2023!</b>
       </h2>
       <h5>
         Add your email to generate your QR code and show it to access the party.
@@ -38,12 +38,12 @@ export default () => {
           value={emailText ? emailText : ""}
           onChange={(input) => setEmailText(input.target.value.trim())}
         />{" "}
-        <Button variant="danger" onClick={() => searchWizeliner()}>
+        <Button variant="danger" onClick={() => searchGuy()}>
           <i className="fa fa-search" aria-hidden="true"></i>
         </Button>
       </div>
 
-      <div className="FindWizelinerQR__container">
+      <div className="FindGuyQR__container">
         {qrValue ? (
           <>
             <Card className="QRResult__container">

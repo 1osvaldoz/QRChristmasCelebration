@@ -1,4 +1,4 @@
-.FindWizelinerHeader__container {
+.FindGuyHeader__container {
   min-height: 200px;
   background-image: url("../../../assets//img/banner2.jpg");
   background-size: auto 100%;
@@ -6,6 +6,6 @@
   text-align: center;
   padding-top: 40px;
 }
-.FindWizelinerHeader__container > svg {
+.FindGuyHeader__container > svg {
   max-width: 300px;
 }
